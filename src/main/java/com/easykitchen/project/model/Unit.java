@@ -1,7 +1,7 @@
 package com.easykitchen.project.model;
 
 public enum Unit {
-    KG("KILOGRAM"), G("GRAM"), KS("KUS");
+    KG("KILOGRAM"), G("GRAM"), PCS("PIECE");
 
     private final String name;
 

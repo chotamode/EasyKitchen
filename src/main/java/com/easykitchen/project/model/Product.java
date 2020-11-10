@@ -24,14 +24,6 @@ public class Product extends AbstractEntity {
     @Column(nullable = false)
     private Double price;
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
     @ManyToMany
     @OrderBy("name")
     private List<Category> categories;
@@ -41,7 +33,13 @@ public class Product extends AbstractEntity {
 
     private Boolean available = false;
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
 
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public String getName() {
         return name;
@@ -97,6 +95,14 @@ public class Product extends AbstractEntity {
             return;
         }
         categories.removeIf(c -> Objects.equals(c.getId(), category.getId()));
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        Objects.requireNonNull(ingredient);
+        if (ingredients == null) {
+            return;
+        }
+        ingredients.removeIf(c -> Objects.equals(c.getId(), ingredient.getId()));
     }
 
     public Boolean isRemoved() {
