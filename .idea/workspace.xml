@@ -26,13 +26,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0ce0a6b-edc5-4663-8f66-5507820260ea" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/model/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ear-project-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ear-project-backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5f4fd801-811d-4cdb-8211-4bf8e47408a2" name="Default Changelist" comment="nikita loh2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/controller/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/controller/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/easykitchen/project/controller/MainPageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/easykitchen/project/controller/MainPageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/model/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/model/Unit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/easykitchen/project/model/Unit.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +39,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -56,7 +55,9 @@
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProjectId" id="1jvPf1IghrcVFkEidoLDjWh0G9q" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,9 +69,21 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.easykitchen.project.model" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.easykitchen.project.model" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="ProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -91,9 +104,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604681691270</updated>
-      <workItem from="1604681692902" duration="303000" />
-      <workItem from="1604683359490" duration="799000" />
-      <workItem from="1604684655019" duration="2017000" />
+      <workItem from="1604681692902" duration="1247000" />
+      <workItem from="1604684145986" duration="3960000" />
+      <workItem from="1604776023772" duration="661000" />
+      <workItem from="1604947113669" duration="13668000" />
+      <workItem from="1605019142073" duration="938000" />
     </task>
     <task id="LOCAL-00001" summary="nikita loh">
       <created>1604681814018</created>
@@ -102,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604681814018</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="nikita loh2">
+      <created>1604682004054</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604682004054</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -134,7 +156,34 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nikita loh" />
-    <option name="LAST_COMMIT_MESSAGE" value="nikita loh" />
+    <MESSAGE value="nikita loh2" />
+    <option name="LAST_COMMIT_MESSAGE" value="nikita loh2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604684101942">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="223" y="72" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.834@0.0.1536.834" timestamp="1604684101942" />
+    <state x="574" y="133" key="#com.intellij.ide.util.MemberChooser" timestamp="1605019283603">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="574" y="133" key="#com.intellij.ide.util.MemberChooser/0.0.1536.834@0.0.1536.834" timestamp="1605019283603" />
+    <state x="399" y="106" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1604684250346">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="399" y="106" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.834@0.0.1536.834" timestamp="1604684250346" />
+    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1604687108464">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1604687108464" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1604684107474">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1604684107474" />
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2" timestamp="1604682018742">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1604682018742" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1398" height="245" key="GridCell.Tab.0.bottom" timestamp="1604685005897">
