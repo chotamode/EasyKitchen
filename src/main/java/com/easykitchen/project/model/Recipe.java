@@ -8,9 +8,9 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Product.findByCategory", query = "SELECT p from Product p WHERE :category MEMBER OF p.categories AND NOT p.available")
+        @NamedQuery(name = "Recipe.findByCategory", query = "SELECT r from Recipe r WHERE :category MEMBER OF r.categories AND NOT r.available")
 })
-public class Product extends AbstractEntity {
+public class Recipe extends AbstractEntity {
 
     @Basic(optional = false)
     @Column(nullable = false)

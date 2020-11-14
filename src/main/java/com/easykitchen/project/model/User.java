@@ -4,6 +4,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "KITCHEN_USER")
+@NamedQueries({
+        @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+})
 public class User extends AbstractEntity{
     @Basic(optional = false)
     @Column(nullable = false)
