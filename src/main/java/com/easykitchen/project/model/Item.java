@@ -13,7 +13,7 @@ public abstract class Item extends AbstractEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(nullable = false)
-    private Product product;
+    private Recipe recipe;
 
     public Integer getAmount() {
         return amount;
@@ -23,19 +23,19 @@ public abstract class Item extends AbstractEntity {
         this.amount = amount;
     }
 
-    public Product getProduct() {
-        return product;
+    public Recipe getProduct() {
+        return recipe;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override
     public String toString() {
         return "Item{" +
                 "amount=" + amount +
-                ", product=" + product +
+                ", product=" + recipe +
                 "}";
     }
 }
