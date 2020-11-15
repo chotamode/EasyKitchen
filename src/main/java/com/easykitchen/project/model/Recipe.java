@@ -43,7 +43,7 @@ public class Recipe extends AbstractEntity {
     @ManyToMany
     private List<Ingredient> ingredients;
 
-    private Boolean available = false;
+    private Boolean available;
 
     public void addCategory(Category category) {
         Objects.requireNonNull(category);
@@ -77,7 +77,7 @@ public class Recipe extends AbstractEntity {
         ingredients.removeIf(c -> Objects.equals(c.getId(), ingredient.getId()));
     }
 
-    public Boolean isRemoved() {
+    public Boolean isAvailable() {
         return available;
     }
 

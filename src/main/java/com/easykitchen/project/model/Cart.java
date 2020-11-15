@@ -24,8 +24,10 @@ public class Cart extends AbstractEntity {
         if (items == null) {
             this.items = new ArrayList<>();
         }
-        final Optional<CartItem> existing = items.stream().filter(it -> it.getRecipe().getId()
-                .equals(item.getRecipe().getId())).findAny();
+        final Optional<CartItem> existing = items.stream()
+                .filter(it -> it.getRecipe().getId()
+                    .equals(item.getRecipe().getId()))
+                .findAny();
         if (existing.isPresent()) {
             existing.get().setAmount(existing.get().getAmount() + item.getAmount());
         } else {
