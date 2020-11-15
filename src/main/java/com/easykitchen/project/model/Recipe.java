@@ -32,6 +32,14 @@ public class Recipe extends AbstractEntity {
     @OrderBy("name")
     private List<Category> categories;
 
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int minsToCook;
+
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private String Discription;
+
     @ManyToMany
     private List<Ingredient> ingredients;
 
