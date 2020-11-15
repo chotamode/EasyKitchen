@@ -11,8 +11,6 @@ import java.util.List;
 @RestController()
 public class MainPageController {
 
-    List<String> stringList = new ArrayList<>();
-
     @GetMapping("/")
     public String testEndPoint() {
         return "Test API";

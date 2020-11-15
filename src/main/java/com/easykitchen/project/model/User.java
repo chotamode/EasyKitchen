@@ -2,8 +2,10 @@ package com.easykitchen.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 })
-public class User extends AbstractEntity{
+public class User extends AbstractEntity {
     @Basic(optional = false)
     @Column(nullable = false)
     private String firstName;
@@ -40,7 +42,11 @@ public class User extends AbstractEntity{
         this.role = Role.GUEST;
     }
 
-    public Address getAddress() {
-        return address;
+    public Boolean isAdmin() {
+        return this.role == Role.ADMIN;
+    }
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        setPassword(passwordEncoder.encode(password));
     }
 }

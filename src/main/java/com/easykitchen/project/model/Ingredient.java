@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class Ingredient extends AbstractEntity{
+public class Ingredient extends AbstractEntity {
     private String name;
-    private int amount;
+    private Integer amount;
     private Unit unit;
 }

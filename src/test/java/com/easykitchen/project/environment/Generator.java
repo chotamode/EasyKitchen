@@ -1,5 +1,6 @@
 package com.easykitchen.project.environment;
 
+import com.easykitchen.project.model.Ingredient;
 import com.easykitchen.project.model.Recipe;
 import com.easykitchen.project.model.User;
 
@@ -28,9 +29,15 @@ public class Generator {
     public static Recipe generateRecipe() {
         final Recipe r = new Recipe();
         r.setName("Product" + randomInt());
-        r.setAmount(1);
         r.setPrice(1.0);
         return r;
+    }
+
+    public static Ingredient generateIngredient(int amount) {
+        final Ingredient ingredient = new Ingredient();
+        ingredient.setName("Ingredient" + randomInt());
+        ingredient.setAmount(amount);
+        return ingredient;
     }
 }
 

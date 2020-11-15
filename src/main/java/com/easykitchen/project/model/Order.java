@@ -12,6 +12,9 @@ import java.util.stream.Collectors;
 @Entity
 @Getter @Setter @NoArgsConstructor
 @Table(name = "SHOP_ORDER")
+@NamedQueries({
+        @NamedQuery(name = "Order.findByUser", query = "SELECT o from Order o WHERE :customer = o.customer")
+})
 public class Order extends AbstractEntity {
 
     @Column(columnDefinition = "TIMESTAMP")
@@ -28,13 +31,14 @@ public class Order extends AbstractEntity {
     public Order(Cart cart) {
         this.customer = cart.getOwner();
         assert cart.getItems() != null;
-        this.items = cart.getItems().stream().map(OrderItem::new).collect(Collectors.toList());
+        this.items = cart.getItems().stream()
+                .map(OrderItem::new)
+                .collect(Collectors.toList());
     }
 
     public Double getTotal() {
         Double total = 0.0;
-        for (OrderItem i:items
-             ) {
+        for (OrderItem i:items) {
             total += i.getRecipe().getPrice();
         }
         return total;
