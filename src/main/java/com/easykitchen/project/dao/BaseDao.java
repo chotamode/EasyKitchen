@@ -1,6 +1,7 @@
 package com.easykitchen.project.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import java.util.Collection;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Objects;
 
 public abstract class BaseDao<T> implements GenericDao<T> {
 
+    @PersistenceContext
     protected EntityManager em;
 
     protected final Class<T> type;

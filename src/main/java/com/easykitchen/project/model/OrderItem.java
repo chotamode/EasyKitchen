@@ -12,6 +12,6 @@ public class OrderItem extends Item {
 
     public OrderItem(Item other) {
         setAmount(other.getAmount());
-        setProduct(other.getProduct());
+        setRecipe(other.getRecipe());
     }
 }

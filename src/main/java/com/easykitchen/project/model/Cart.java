@@ -1,11 +1,14 @@
 package com.easykitchen.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@Getter @Setter
 public class Cart extends AbstractEntity {
 
     @JsonIgnore
@@ -16,29 +19,13 @@ public class Cart extends AbstractEntity {
     @JoinColumn(name = "cart_id")
     private List<CartItem> items;
 
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public List<CartItem> getItems() {
-        return items;
-    }
-
-    public void setItems(List<CartItem> items) {
-        this.items = items;
-    }
-
     public void addItem(CartItem item) {
         Objects.requireNonNull(item);
         if (items == null) {
             this.items = new ArrayList<>();
         }
-        final Optional<CartItem> existing = items.stream().filter(it -> it.getProduct().getId()
-                .equals(item.getProduct().getId())).findAny();
+        final Optional<CartItem> existing = items.stream().filter(it -> it.getRecipe().getId()
+                .equals(item.getRecipe().getId())).findAny();
         if (existing.isPresent()) {
             existing.get().setAmount(existing.get().getAmount() + item.getAmount());
         } else {
@@ -51,7 +38,7 @@ public class Cart extends AbstractEntity {
         final Iterator<CartItem> it = items.iterator();
         while (it.hasNext()) {
             final CartItem curr = it.next();
-            if (curr.getProduct().getId().equals(item.getProduct().getId())) {
+            if (curr.getRecipe().getId().equals(item.getRecipe().getId())) {
                 if (item.getAmount() >= curr.getAmount()) {
                     it.remove();
                 } else {
