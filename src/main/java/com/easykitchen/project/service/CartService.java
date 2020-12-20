@@ -30,6 +30,14 @@ public class CartService {
     public void addRecipe(Cart cart, CartItem cartItem) {
         Objects.requireNonNull(cart);
         Objects.requireNonNull(cartItem);
+        Recipe recipe = cartItem.getRecipe();
+        recipe.getRecipeIngredients()
+                .forEach(ingredient -> {
+                    if (ingredient.getAmount() > ingredient.getStorageIngredient().getAmount()) {
+                        throw new InsufficientAmountException("The amount of ingredient " + ingredient
+                                + " needed for the recipe " + recipe + " is insufficient");
+                    }
+                });
         if (cartItem.getRecipe().isAvailable()) {
             cart.addItem(cartItem);
             updateProductAvailabilityOnAdd(cartItem);
@@ -48,28 +56,25 @@ public class CartService {
 
     private void updateProductAvailabilityOnAdd(Item item) {
         final Recipe recipe = item.getRecipe();
-        recipe.getIngredients()
+        recipe.getRecipeIngredients()
                 .forEach(ingredient -> {
-                    Integer amount = ingredient.getAmount();
-                    if (amount <= 0) {
+                    if (ingredient.getAmount() > ingredient.getStorageIngredient().getAmount()) {
                         throw new InsufficientAmountException("The amount of ingredient " + ingredient
                                 + " needed for the recipe " + recipe + " is insufficient");
                     }
-                    ingredient.setAmount(amount - 1);
-                    if (ingredient.getAmount() == 0) {
-                        recipe.setAvailable(false);
-                    }
+                    ingredient.getStorageIngredient().setAmount(ingredient.getStorageIngredient().getAmount() - ingredient.getAmount());
                 });
+        recipe.isAvailable();
         recipeDao.update(recipe);
     }
 
     private void updateProductAvailabilityOnRemove(Item item) {
         final Recipe recipe = item.getRecipe();
-        recipe.getIngredients()
+        recipe.getRecipeIngredients()
                 .forEach(ingredient -> {
-                    Integer amount = ingredient.getAmount();
-                    ingredient.setAmount(amount + 1);
+                    ingredient.getStorageIngredient().setAmount(ingredient.getStorageIngredient().getAmount() + ingredient.getAmount());
                 });
+        recipe.isAvailable();
         recipeDao.update(recipe);
     }
 }

@@ -1,7 +1,8 @@
 package com.easykitchen.project.environment;
 
-import com.easykitchen.project.model.Ingredient;
+import com.easykitchen.project.model.RecipeIngredient;
 import com.easykitchen.project.model.Recipe;
+import com.easykitchen.project.model.StorageIngredient;
 import com.easykitchen.project.model.User;
 
 import java.util.Random;
@@ -33,11 +34,16 @@ public class Generator {
         return r;
     }
 
-    public static Ingredient generateIngredient(int amount) {
-        final Ingredient ingredient = new Ingredient();
-        ingredient.setName("Ingredient" + randomInt());
-        ingredient.setAmount(amount);
-        return ingredient;
+    public static RecipeIngredient generateIngredient(int amountR, int amountS) {
+        final RecipeIngredient recipeIngredient = new RecipeIngredient();
+        final StorageIngredient storageIngredient = new StorageIngredient();
+        storageIngredient.setAmount(amountS);
+        storageIngredient.setName("StorageIngredient" + randomInt());
+        recipeIngredient.setName("RecipeIngredient" + randomInt());
+        recipeIngredient.setAmount(amountR);
+        recipeIngredient.setStorageIngredient(storageIngredient);
+        return recipeIngredient;
+
     }
 }
 

@@ -41,9 +41,11 @@ public class Recipe extends AbstractEntity {
     private String Discription;
 
     @ManyToMany
-    private List<Ingredient> ingredients;
+    private List<RecipeIngredient> recipeIngredients;
 
-    private Boolean available;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean available;
 
     public void addCategory(Category category) {
         Objects.requireNonNull(category);
@@ -53,12 +55,12 @@ public class Recipe extends AbstractEntity {
         categories.add(category);
     }
 
-    public void addIngredient(Ingredient ingredient) {
-        Objects.requireNonNull(ingredient);
-        if (ingredients == null) {
-            this.ingredients = new ArrayList<>();
+    public void addIngredient(RecipeIngredient recipeIngredient) {
+        Objects.requireNonNull(recipeIngredient);
+        if (recipeIngredients == null) {
+            this.recipeIngredients = new ArrayList<>();
         }
-        ingredients.add(ingredient);
+        recipeIngredients.add(recipeIngredient);
     }
 
     public void removeCategory(Category category) {
@@ -69,15 +71,21 @@ public class Recipe extends AbstractEntity {
         categories.removeIf(c -> Objects.equals(c.getId(), category.getId()));
     }
 
-    public void removeIngredient(Ingredient ingredient) {
-        Objects.requireNonNull(ingredient);
-        if (ingredients == null) {
+    public void removeIngredient(RecipeIngredient recipeIngredient) {
+        Objects.requireNonNull(recipeIngredient);
+        if (recipeIngredients == null) {
             return;
         }
-        ingredients.removeIf(c -> Objects.equals(c.getId(), ingredient.getId()));
+        recipeIngredients.removeIf(c -> Objects.equals(c.getId(), recipeIngredient.getId()));
     }
 
     public Boolean isAvailable() {
+        available = true;
+        for (RecipeIngredient recipeIngredient : recipeIngredients) {
+            if (recipeIngredient.getAmount() > recipeIngredient.getStorageIngredient().getAmount()) {
+                available =  false;
+            }
+        }
         return available;
     }
 
