@@ -44,6 +44,7 @@ public class Recipe extends AbstractEntity {
     private List<Ingredient> ingredients;
 
     private Boolean available;
+    private Boolean removed = false;
 
     public void addCategory(Category category) {
         Objects.requireNonNull(category);
@@ -79,6 +80,9 @@ public class Recipe extends AbstractEntity {
 
     public Boolean isAvailable() {
         return available;
+    }
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 
     @Override

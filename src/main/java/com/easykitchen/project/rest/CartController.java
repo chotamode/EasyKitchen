@@ -1,0 +1,44 @@
+package com.easykitchen.project.rest;
+
+import com.easykitchen.project.model.Cart;
+import com.easykitchen.project.model.CartItem;
+import com.easykitchen.project.service.CartService;
+import com.easykitchen.project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/rest/cart")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')")
+public class CartController {
+
+    private final CartService cartService;
+
+    private final UserService userService;
+
+    @Autowired
+    public CartController(CartService cartService, UserService userService) {
+        this.cartService = cartService;
+        this.userService = userService;
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public Cart getCart() {
+        return userService.getCurrentUserCart();
+    }
+
+    @PutMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addItem(@RequestBody CartItem item) {
+        final Cart cart = getCart();
+        cartService.addRecipe(cart, item);
+    }
+
+    @DeleteMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void removeItem(@RequestBody CartItem item) {
+        final Cart cart = getCart();
+        cartService.removeRecipe(cart, item);
+    }
+}
