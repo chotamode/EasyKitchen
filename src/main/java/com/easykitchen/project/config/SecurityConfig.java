@@ -1,11 +1,11 @@
 package com.easykitchen.project.config;
 
-import com.easykitchen.project.auth.UsernameAndPasswordAuthenticationFilter;
-import com.easykitchen.project.service.auth.DefaultUserDetailService;
+import com.easykitchen.project.security.TokenVerifier;
+import com.easykitchen.project.security.UsernameAndPasswordAuthenticationFilter;
+import com.easykitchen.project.service.DefaultUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -36,12 +36,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new UsernameAndPasswordAuthenticationFilter(authenticationManager()))
+                .addFilterAfter(new TokenVerifier(), UsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll();
+                .antMatchers("/login", "/register").permitAll()
+                .anyRequest()
+                    .authenticated();
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 

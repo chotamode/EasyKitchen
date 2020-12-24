@@ -1,6 +1,5 @@
-package com.easykitchen.project.model.auth;
+package com.easykitchen.project.model;
 
-import com.easykitchen.project.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +36,7 @@ public class DefaultUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

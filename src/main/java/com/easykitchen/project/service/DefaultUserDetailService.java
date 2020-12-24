@@ -1,8 +1,8 @@
-package com.easykitchen.project.service.auth;
+package com.easykitchen.project.service;
 
 import com.easykitchen.project.dao.UserDao;
 import com.easykitchen.project.model.User;
-import com.easykitchen.project.model.auth.DefaultUserDetails;
+import com.easykitchen.project.model.DefaultUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
