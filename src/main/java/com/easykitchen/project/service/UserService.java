@@ -9,7 +9,6 @@ import com.easykitchen.project.model.Cart;
 import com.easykitchen.project.model.Order;
 import com.easykitchen.project.model.Payment;
 import com.easykitchen.project.model.User;
-import com.easykitchen.project.security.SecurityUtils;
 import com.easykitchen.project.util.BackendConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -82,13 +81,6 @@ public class UserService {
             throw new AlreadyExistingUserException("User with this username already exists!");
         }
     }
-    public Cart getCurrentUserCart() {
-        final User currentUser = SecurityUtils.getCurrentUser();
-        assert currentUser != null;
-        if (currentUser.isAdmin()) {
-            throw new CartAccessException("Admin cannot shop, so it does not have a cart either.");
-        }
-        return currentUser.getCart();
-    }
+
 
 }

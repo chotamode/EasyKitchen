@@ -3,7 +3,6 @@ package com.easykitchen.project.environment;
 import com.easykitchen.project.config.AppConfig;
 import com.easykitchen.project.model.User;
 import com.easykitchen.project.security.model.AuthenticationToken;
-import com.easykitchen.project.security.model.UserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -38,17 +37,6 @@ public class Enviroment {
         return new StringHttpMessageConverter(StandardCharsets.UTF_8);
     }
 
-    /**
-     * Initializes security context with the specified user.
-     *
-     * @param user User to set as currently authenticated
-     */
-    public static void setCurrentUser(User user) {
-        final UserDetails userDetails = new UserDetails(user, new HashSet<>());
-        SecurityContext context = new SecurityContextImpl();
-        context.setAuthentication(new AuthenticationToken(userDetails.getAuthorities(), userDetails));
-        SecurityContextHolder.setContext(context);
-    }
 
     /**
      * Clears current security context.

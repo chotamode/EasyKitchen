@@ -34,19 +34,6 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createOrder(Principal principal, @RequestBody(required = false) Cart cart) {
-        final Authentication auth = (Authentication) principal;
-        final Cart forOrder;
-        if (auth != null && auth.isAuthenticated()) {
-            forOrder = userService.getCurrentUserCart();
-        } else {
-            forOrder = cart;
-        }
-        final Order order = orderService.create(forOrder);
-        final HttpHeaders headers = RestUtils.createLocationHeaderFromCurrentUri("/{id}", order.getId());
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);
-    }
 
     // Overrides class-level authorization settings
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')")
@@ -57,10 +44,6 @@ public class OrderController {
             throw NotFoundException.create("Order", id);
         }
         final AuthenticationToken auth = (AuthenticationToken) principal;
-        if (auth.getPrincipal().getUser().getRole() != Role.ADMIN &&
-                !order.getCustomer().getId().equals(auth.getPrincipal().getUser().getId())) {
-            throw new AccessDeniedException("Cannot access order of another customer");
-        }
         return order;
     }
 }

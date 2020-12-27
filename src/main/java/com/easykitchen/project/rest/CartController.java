@@ -24,21 +24,6 @@ public class CartController {
         this.cartService = cartService;
         this.userService = userService;
     }
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Cart getCart() {
-        return userService.getCurrentUserCart();
-    }
 
-    @PutMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addItem(@RequestBody CartItem item) {
-        final Cart cart = getCart();
-        cartService.addRecipe(cart, item);
-    }
 
-    @DeleteMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void removeItem(@RequestBody CartItem item) {
-        final Cart cart = getCart();
-        cartService.removeRecipe(cart, item);
-    }
 }

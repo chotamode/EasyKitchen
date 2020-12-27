@@ -1,7 +1,6 @@
 package com.easykitchen.project.rest.handler;
 
 import com.easykitchen.project.exception.*;
-import com.easykitchen.project.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -49,16 +48,7 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errorInfo(request, e), HttpStatus.CONFLICT);
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ErrorInfo> accessDenied(HttpServletRequest request, AccessDeniedException e) {
-        // Spring Boot throws Access Denied when trying to access a secured method with anonymous authentication token
-        // We want to let such exception out, so that it is handled by the authentication entry point (which returns 401)
-        if (SecurityUtils.isAuthenticatedAnonymously()) {
-            throw e;
-        }
-        logException(e);
-        return new ResponseEntity<>(errorInfo(request, e), HttpStatus.FORBIDDEN);
-    }
+
 
     @ExceptionHandler(CartAccessException.class)
     public ResponseEntity<ErrorInfo> cartAccessException(HttpServletRequest request, CartAccessException e) {
