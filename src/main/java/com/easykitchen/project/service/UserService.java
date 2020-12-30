@@ -4,6 +4,7 @@ import com.easykitchen.project.dao.OrderDao;
 import com.easykitchen.project.dao.PaymentDao;
 import com.easykitchen.project.dao.UserDao;
 import com.easykitchen.project.exception.AlreadyExistingUserException;
+import com.easykitchen.project.exception.CartAccessException;
 import com.easykitchen.project.model.Cart;
 import com.easykitchen.project.model.Order;
 import com.easykitchen.project.model.Payment;
@@ -80,4 +81,6 @@ public class UserService {
             throw new AlreadyExistingUserException("User with this username already exists!");
         }
     }
+
+
 }

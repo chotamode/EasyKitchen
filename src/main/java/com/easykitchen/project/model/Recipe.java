@@ -88,6 +88,9 @@ public class Recipe extends AbstractEntity {
         }
         return available;
     }
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
+    }
 
     @Override
     public String toString() {
