@@ -1,6 +1,6 @@
 package com.easykitchen.project.dao;
 
-import com.easykitchen.project.model.Ingredient;
+import com.easykitchen.project.model.RecipeIngredient;
 import org.springframework.stereotype.Repository;
 import com.easykitchen.project.model.Category;
 import com.easykitchen.project.model.Recipe;
@@ -26,18 +26,18 @@ public class RecipeDao extends BaseDao<Recipe> {
                 .getResultList();
     }
 
-    public void addOneProduct(Ingredient ingredient, Recipe recipe) {
-        Objects.requireNonNull(ingredient);
+    public void addOneProduct(RecipeIngredient recipeIngredient, Recipe recipe) {
+        Objects.requireNonNull(recipeIngredient);
         Objects.requireNonNull(recipe);
 
-        List<Ingredient> ingredients = recipe.getIngredients();
+        List<RecipeIngredient> recipeIngredients = recipe.getRecipeIngredients();
 
-        if (ingredients.contains(ingredient)) {
+        if (recipeIngredients.contains(recipeIngredient)) {
             return;
         }
 
-        ingredients.add(ingredient);
-        recipe.setIngredients(ingredients);
+        recipeIngredients.add(recipeIngredient);
+        recipe.setRecipeIngredients(recipeIngredients);
         persist(recipe);
     }
 

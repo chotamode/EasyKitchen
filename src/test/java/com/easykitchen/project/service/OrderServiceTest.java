@@ -72,10 +72,10 @@ class OrderServiceTest {
 
     private void prepareCartForOrder() {
         final Recipe recipe = Generator.generateRecipe();
-        Ingredient ingredient1 = Generator.generateIngredient(2);
-        Ingredient ingredient2 = Generator.generateIngredient(2);
+        RecipeIngredient recipeIngredient1 = Generator.generateIngredient(2, 4);
+        RecipeIngredient recipeIngredient2 = Generator.generateIngredient(2, 4);
         recipe.setAvailable(true);
-        recipe.setIngredients(new ArrayList<>(Arrays.asList(ingredient1, ingredient2)));
+        recipe.setRecipeIngredients(new ArrayList<>(Arrays.asList(recipeIngredient1, recipeIngredient2)));
         entityManager.persist(recipe);
         CartItem cartItem = new CartItem();
         cartItem.setRecipe(recipe);
