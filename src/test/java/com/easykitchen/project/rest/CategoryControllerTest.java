@@ -117,7 +117,7 @@ public class CategoryControllerTest extends BaseControllerTestRunner {
 
     @Test
     public void getRecipesByCategoryReturnsRecipesForCategory() throws Exception {
-        final List<Recipe> recipes = Arrays.asList(Generator.generateRecipe(), Generator.generateRecipe());
+        final List<Recipe> recipes = Arrays.asList(Generator.generateRecipe(1), Generator.generateRecipe(1));
         when(recipeService.findAll(any())).thenReturn(recipes);
         final Category category = new Category();
         category.setName("test");
@@ -146,7 +146,7 @@ public class CategoryControllerTest extends BaseControllerTestRunner {
         category.setName("test");
         category.setId(Generator.randomInt());
         when(categoryServiceMock.find(any())).thenReturn(category);
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(Generator.randomInt());
         mockMvc.perform(post("/rest/categories/" + category.getId() + "/recipes").content(toJson(recipe)).contentType(
                 MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isNoContent());
@@ -157,7 +157,7 @@ public class CategoryControllerTest extends BaseControllerTestRunner {
 
     @Test
     public void addRecipeToCategoryThrowsNotFoundForUnknownCategory() throws Exception {
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(Generator.randomInt());
         final int categoryId = 123;
         mockMvc.perform(post("/rest/categories/" + categoryId + "/recipes").content(toJson(recipe)).contentType(
@@ -172,7 +172,7 @@ public class CategoryControllerTest extends BaseControllerTestRunner {
         category.setName("test");
         category.setId(Generator.randomInt());
         when(categoryServiceMock.find(any())).thenReturn(category);
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(Generator.randomInt());
         recipe.addCategory(category);
         when(recipeService.find(any())).thenReturn(recipe);

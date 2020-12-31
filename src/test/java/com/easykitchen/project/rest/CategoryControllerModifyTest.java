@@ -68,7 +68,7 @@ public class CategoryControllerModifyTest extends BaseControllerTestRunner {
         category.setName("test");
         category.setId(Generator.randomInt());
         when(categoryServiceMock.find(any())).thenReturn(category);
-        final Recipe re = Generator.generateRecipe();
+        final Recipe re = Generator.generateRecipe(1);
         re.setId(Generator.randomInt());
         mockMvc.perform(post("/rest/categories/" + category.getId() + "/recipes").content(toJson(re)).contentType(
                 MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isNoContent());
@@ -83,7 +83,7 @@ public class CategoryControllerModifyTest extends BaseControllerTestRunner {
         category.setName("test");
         category.setId(Generator.randomInt());
         when(categoryServiceMock.find(any())).thenReturn(category);
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(Generator.randomInt());
         recipe.addCategory(category);
         when(recipeService.find(any())).thenReturn(recipe);
