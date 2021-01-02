@@ -42,7 +42,7 @@ public class RecipeControllerTest extends BaseControllerTestRunner {
 
     @Test
     public void getAllReturnsAllRecipes() throws Exception {
-        final List<Recipe> recipes = IntStream.range(0, 5).mapToObj(i -> Generator.generateRecipe()).collect(
+        final List<Recipe> recipes = IntStream.range(0, 5).mapToObj(i -> Generator.generateRecipe(1)).collect(
                 Collectors.toList());
         when(recipeServiceMock.findAll()).thenReturn(recipes);
         final MvcResult mvcResult = mockMvc.perform(get("/rest/recipes")).andReturn();
@@ -58,7 +58,7 @@ public class RecipeControllerTest extends BaseControllerTestRunner {
 
     @Test
     public void getByIdReturnsRecipeWithMatchingId() throws Exception {
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(123);
         when(recipeServiceMock.find(recipe.getId())).thenReturn(recipe);
         final MvcResult mvcResult = mockMvc.perform(get("/rest/recipes/" + recipe.getId())).andReturn();
@@ -82,7 +82,7 @@ public class RecipeControllerTest extends BaseControllerTestRunner {
 
     @Test
     public void removeRemovesRecipeUsingService() throws Exception {
-        final Recipe recipe = Generator.generateRecipe();
+        final Recipe recipe = Generator.generateRecipe(1);
         recipe.setId(123);
         when(recipeServiceMock.find(recipe.getId())).thenReturn(recipe);
         mockMvc.perform(delete("/rest/recipes/" + recipe.getId())).andExpect(status().isNoContent());

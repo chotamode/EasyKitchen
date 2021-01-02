@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Getter @Setter
 @NamedQueries({
-        @NamedQuery(name = "Recipe.findByCategory", query = "SELECT r from Recipe r WHERE :category MEMBER OF r.categories AND NOT r.available")
+        @NamedQuery(name = "Recipe.findByCategory", query = "SELECT r from Recipe r WHERE :category MEMBER OF r.categories AND NOT r.removed")
 })
 public class Recipe extends AbstractEntity {
 
@@ -34,18 +34,11 @@ public class Recipe extends AbstractEntity {
 
     @Basic(optional = false)
     @Column(nullable = false)
-    private int minsToCook;
-
-    @Basic(optional = false)
-    @Column(nullable = false)
     private String Discription;
 
-    @ManyToMany
-    private List<RecipeIngredient> recipeIngredients;
-
     @Basic(optional = false)
     @Column(nullable = false)
-    private boolean available;
+    private boolean removed;
 
     public void addCategory(Category category) {
         Objects.requireNonNull(category);
@@ -55,41 +48,12 @@ public class Recipe extends AbstractEntity {
         categories.add(category);
     }
 
-    public void addIngredient(RecipeIngredient recipeIngredient) {
-        Objects.requireNonNull(recipeIngredient);
-        if (recipeIngredients == null) {
-            this.recipeIngredients = new ArrayList<>();
-        }
-        recipeIngredients.add(recipeIngredient);
-    }
-
     public void removeCategory(Category category) {
         Objects.requireNonNull(category);
         if (categories == null) {
             return;
         }
         categories.removeIf(c -> Objects.equals(c.getId(), category.getId()));
-    }
-
-    public void removeIngredient(RecipeIngredient recipeIngredient) {
-        Objects.requireNonNull(recipeIngredient);
-        if (recipeIngredients == null) {
-            return;
-        }
-        recipeIngredients.removeIf(c -> Objects.equals(c.getId(), recipeIngredient.getId()));
-    }
-
-    public Boolean isAvailable() {
-        available = true;
-        for (RecipeIngredient recipeIngredient : recipeIngredients) {
-            if (recipeIngredient.getAmount() > recipeIngredient.getStorageIngredient().getAmount()) {
-                available =  false;
-            }
-        }
-        return available;
-    }
-    public void setRemoved(Boolean removed) {
-        this.removed = removed;
     }
 
     @Override

@@ -87,7 +87,7 @@ public class CategoryControllerGetTest extends BaseControllerTestRunner{
 
     @Test
     public void getRecipesByCategoryReturnsRecipesForCategory() throws Exception {
-        final List<Recipe> recipes = Arrays.asList(Generator.generateRecipe(), Generator.generateRecipe());
+        final List<Recipe> recipes = Arrays.asList(Generator.generateRecipe(1), Generator.generateRecipe(1));
         when(recipeServiceMock.findAll(any())).thenReturn(recipes);
         final Category category = new Category();
         category.setName("test");

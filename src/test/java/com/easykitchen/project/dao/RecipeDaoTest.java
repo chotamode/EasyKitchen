@@ -54,7 +54,7 @@ public class RecipeDaoTest {
         final List<Recipe> inCategory = new ArrayList<>();
         final Category other = generateCategory("otherCategory");
         for (int i = 0; i < 10; i++) {
-            final Recipe r = Generator.generateRecipe();
+            final Recipe r = Generator.generateRecipe(1);
             r.setCategories(new ArrayList<>(Collections.singletonList(other)));
             if (Generator.randomBoolean()) {
                 r.addCategory(category);
