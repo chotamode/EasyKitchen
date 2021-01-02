@@ -31,7 +31,6 @@ public class CategoryController {
         this.recipeService = recipeService;
     }
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Category> getCategories() {
         return service.findAll();
@@ -47,7 +46,6 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // If the parameter name matches parameter in the mapping value, it is not necessary to explicitly provide it
     public Category getById(@PathVariable Integer id) {
         final Category category = service.find(id);
         if (category == null) {
