@@ -18,6 +18,7 @@ public class Payment extends AbstractEntity{
     private LocalDateTime paid;
     private Double total;
     private String details;
+    private boolean cancelled = false;
 
     @ManyToOne
     private User customer;

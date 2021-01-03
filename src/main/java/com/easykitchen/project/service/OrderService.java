@@ -123,4 +123,9 @@ public class OrderService {
     public Order find(Integer id) {
         return orderDao.find(id);
     }
+
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<Order> findAll() {
+        return orderDao.findAll();
+    }
 }

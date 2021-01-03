@@ -43,7 +43,7 @@ public class Order extends AbstractEntity {
     public Double getTotal() {
         Double total = 0.0;
         for (OrderItem i:items) {
-            total += i.getRecipe().getPrice();
+            total += i.getRecipe().getPrice() * i.getAmount();
         }
         return total;
     }

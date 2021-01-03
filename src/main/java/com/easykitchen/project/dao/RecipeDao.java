@@ -3,6 +3,7 @@ package com.easykitchen.project.dao;
 import org.springframework.stereotype.Repository;
 import com.easykitchen.project.model.Category;
 import com.easykitchen.project.model.Recipe;
+import org.springframework.test.context.ContextConfiguration;
 
 import java.util.List;
 import java.util.Objects;
