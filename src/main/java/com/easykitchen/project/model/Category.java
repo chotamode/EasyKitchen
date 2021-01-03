@@ -17,6 +17,10 @@ public class Category extends AbstractEntity {
     @Column(nullable = false)
     private String name;
 
+    @Basic(optional = true)
+    @Column(nullable = true)
+    private String description;
+
     @Override
     public String toString() {
         return "Category{" +
