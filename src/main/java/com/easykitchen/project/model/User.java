@@ -34,9 +34,6 @@ public class User extends AbstractEntity {
 
     private Address address;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Cart cart;
-
     public User() {
         this.role = Role.GUEST;
     }

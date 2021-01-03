@@ -4,8 +4,6 @@ import com.easykitchen.project.dao.OrderDao;
 import com.easykitchen.project.dao.PaymentDao;
 import com.easykitchen.project.dao.UserDao;
 import com.easykitchen.project.exception.AlreadyExistingUserException;
-import com.easykitchen.project.exception.CartAccessException;
-import com.easykitchen.project.model.Cart;
 import com.easykitchen.project.model.Order;
 import com.easykitchen.project.model.Payment;
 import com.easykitchen.project.model.User;
@@ -45,7 +43,6 @@ public class UserService {
         if (user.getRole() == null) {
             user.setRole(BackendConstants.DEFAULT_ROLE);
         }
-        user.setCart(createCart(user));
         userDao.persist(user);
     }
 
@@ -71,13 +68,6 @@ public class UserService {
         final User user = userDao.findByUsername(username);
         if (user != null) {
             return paymentDao.findAll(user);
-        }
-        return null;
-    }
-
-    private Cart createCart(User user) {
-        if (!user.isAdmin()) {
-            return new Cart();
         }
         return null;
     }

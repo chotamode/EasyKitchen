@@ -32,14 +32,6 @@ public class Order extends AbstractEntity {
     @Column(nullable = false)
     private Integer numberOfItems;
 
-    public Order(Cart cart) {
-        this.customer = cart.getOwner();
-        assert cart.getItems() != null;
-        this.items = cart.getItems().stream()
-                .map(OrderItem::new)
-                .collect(Collectors.toList());
-    }
-
     public Double getTotal() {
         Double total = 0.0;
         for (OrderItem i:items) {
