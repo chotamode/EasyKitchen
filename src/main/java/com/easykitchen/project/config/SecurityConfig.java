@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .addFilterAfter(new TokenVerifier(), UsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/rest/categories").permitAll()
                 .anyRequest()
                     .authenticated();
         http.cors();
