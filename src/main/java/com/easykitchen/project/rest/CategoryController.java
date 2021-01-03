@@ -60,10 +60,11 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping(value = "/{id}/recipes", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{id}/recipes/{recipeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addProductToCategory(@PathVariable Integer id, @RequestBody Recipe recipe) {
+    public void addProductToCategory(@PathVariable Integer id, @PathVariable Integer recipeId) {
         final Category category = getById(id);
+        final Recipe recipe = recipeService.find(recipeId);
         service.addRecipe(category, recipe);
         LOG.debug("Product {} added into category {}.", recipe, category);
     }

@@ -34,7 +34,7 @@ public class Recipe extends AbstractEntity {
 
     @Basic(optional = false)
     @Column(nullable = false)
-    private String Discription;
+    private String description;
 
     @Basic(optional = false)
     @Column(nullable = false)

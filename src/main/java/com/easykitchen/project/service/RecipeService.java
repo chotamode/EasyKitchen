@@ -30,6 +30,11 @@ public class RecipeService {
     }
 
     @Transactional(readOnly = true)
+    public List<Recipe> findAllByAmount(Category category, Integer amount) {
+        return dao.findAllByAmount(category, amount);
+    }
+
+    @Transactional(readOnly = true)
     public Recipe find(Integer id) {
         return dao.find(id);
     }
