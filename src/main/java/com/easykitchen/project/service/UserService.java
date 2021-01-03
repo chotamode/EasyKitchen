@@ -50,6 +50,12 @@ public class UserService {
     }
 
     @Transactional
+    public User getUser(String username) {
+        Objects.requireNonNull(username);
+        return userDao.findByUsername(username);
+    }
+
+    @Transactional
     public List<Order> getAllOrders(String username) {
         Objects.requireNonNull(username);
         final User user = userDao.findByUsername(username);

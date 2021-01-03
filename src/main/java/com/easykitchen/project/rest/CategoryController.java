@@ -31,7 +31,6 @@ public class CategoryController {
         this.recipeService = recipeService;
     }
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Category> getCategories() {
         return service.findAll();
@@ -47,7 +46,6 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // If the parameter name matches parameter in the mapping value, it is not necessary to explicitly provide it
     public Category getById(@PathVariable Integer id) {
         final Category category = service.find(id);
         if (category == null) {
@@ -62,10 +60,11 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping(value = "/{id}/recipes", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{id}/recipes/{recipeId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void addProductToCategory(@PathVariable Integer id, @RequestBody Recipe recipe) {
+    public void addProductToCategory(@PathVariable Integer id, @PathVariable Integer recipeId) {
         final Category category = getById(id);
+        final Recipe recipe = recipeService.find(recipeId);
         service.addRecipe(category, recipe);
         LOG.debug("Product {} added into category {}.", recipe, category);
     }

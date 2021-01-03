@@ -28,6 +28,10 @@ public class Order extends AbstractEntity {
     @JoinColumn(name = "order_id")
     private List<OrderItem> items;
 
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer numberOfItems;
+
     public Order(Cart cart) {
         this.customer = cart.getOwner();
         assert cart.getItems() != null;
