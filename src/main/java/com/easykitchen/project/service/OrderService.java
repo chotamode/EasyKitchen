@@ -37,8 +37,11 @@ public class OrderService {
         Objects.requireNonNull(user);
         Objects.requireNonNull(category);
         checkAmount(amount);
-        Order order = new Order();
         List<Recipe> recipeList = recipeService.findAllByAmount(category, amount);
+        if (recipeList == null) {
+            return null;
+        }
+        Order order = new Order();
         List<OrderItem> orderItems = new ArrayList<>();
         for (Recipe r : recipeList) {
             orderItems.add(new OrderItem(r));

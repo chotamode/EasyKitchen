@@ -28,8 +28,12 @@ public class RecipeDao extends BaseDao<Recipe> {
 
     public List<Recipe> findAllByAmount(Category category, Integer amount) {
         Objects.requireNonNull(category);
-        return em.createNamedQuery("Recipe.findByCategory", Recipe.class).setParameter("category", category)
-                .getResultList().subList(0, amount);
+        try {
+            return em.createNamedQuery("Recipe.findByCategory", Recipe.class).setParameter("category", category)
+                    .getResultList().subList(0, amount);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

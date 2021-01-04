@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import com.easykitchen.project.model.User;
 
 import javax.persistence.NoResultException;
+import java.util.Objects;
 
 @Repository
 public class UserDao extends BaseDao<User> {

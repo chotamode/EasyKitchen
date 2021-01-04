@@ -4,6 +4,7 @@ import com.easykitchen.project.dao.OrderDao;
 import com.easykitchen.project.dao.PaymentDao;
 import com.easykitchen.project.dao.UserDao;
 import com.easykitchen.project.exception.AlreadyExistingUserException;
+import com.easykitchen.project.exception.NotFoundException;
 import com.easykitchen.project.model.Order;
 import com.easykitchen.project.model.Payment;
 import com.easykitchen.project.model.User;
@@ -47,6 +48,15 @@ public class UserService {
     }
 
     @Transactional
+    public void updateUser(User user) {
+        Objects.requireNonNull(user);
+        if (user.getPassword() != null) {
+            user.encodePassword(passwordEncoder);
+        }
+        userDao.update(user);
+    }
+
+    @Transactional
     public User getUser(String username) {
         Objects.requireNonNull(username);
         return userDao.findByUsername(username);
@@ -77,6 +87,4 @@ public class UserService {
             throw new AlreadyExistingUserException("User with this username already exists!");
         }
     }
-
-
 }

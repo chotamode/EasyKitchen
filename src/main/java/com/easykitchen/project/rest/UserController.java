@@ -5,11 +5,11 @@ import com.easykitchen.project.model.Payment;
 import com.easykitchen.project.model.User;
 import com.easykitchen.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,5 +52,12 @@ public class UserController {
                 .getAuthentication()
                 .getPrincipal();
         return userService.getAllPayments(userName);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')")
+    @PutMapping("/current/edit")
+    public ResponseEntity<Void> editUser(@RequestBody User user) {
+        userService.updateUser(user);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

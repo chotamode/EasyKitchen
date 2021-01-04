@@ -63,21 +63,19 @@ public class OrderController {
         User user = userService.getUser(userName);
         Category category = categoryService.find(categoryId);
         Order order = orderService.createOrder(user, amount, category);
+        if (order == null) {
+            return new ResponseEntity<>(null, null, HttpStatus.BAD_REQUEST);
+        }
         Map<String, Object> returnMap = new HashMap<>();
         returnMap.put("id", order.getId());
         returnMap.put("total", order.getTotal());
         returnMap.put("items", order.getItems());
-        return new ResponseEntity<Map>(returnMap, null, HttpStatus.CREATED);
+        return new ResponseEntity<>(returnMap, null, HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping(value = "/pay/{orderId}")
     public ResponseEntity<Void> payOrder(@PathVariable Integer orderId) {
-        String userName = (String) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
-        User user = userService.getUser(userName);
         paymentService.makePayment(orderService.find(orderId));
         for (OrderItem i: orderService.find(orderId).getItems()) {
             i.getRecipe().setAmount(i.getRecipe().getAmount() - i.getAmount());

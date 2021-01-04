@@ -63,21 +63,6 @@ public class CategoryControllerModifyTest extends BaseControllerTestRunner {
     }
 
     @Test
-    public void addRecipeToCategoryAddsRecipeToSpecifiedCategory() throws Exception {
-        final Category category = new Category();
-        category.setName("test");
-        category.setId(Generator.randomInt());
-        when(categoryServiceMock.find(any())).thenReturn(category);
-        final Recipe re = Generator.generateRecipe(1);
-        re.setId(Generator.randomInt());
-        mockMvc.perform(post("/rest/categories/" + category.getId() + "/recipes").content(toJson(re)).contentType(
-                MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isNoContent());
-        final ArgumentCaptor<Recipe> captor = ArgumentCaptor.forClass(Recipe.class);
-        verify(categoryServiceMock).addRecipe(eq(category), captor.capture());
-        assertEquals(re.getId(), captor.getValue().getId());
-    }
-
-    @Test
     public void removeRecipeRemovesRecipeFromCategory() throws Exception {
         final Category category = new Category();
         category.setName("test");
