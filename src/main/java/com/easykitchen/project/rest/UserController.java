@@ -1,6 +1,7 @@
 package com.easykitchen.project.rest;
 
 import com.easykitchen.project.model.Order;
+import com.easykitchen.project.model.Payment;
 import com.easykitchen.project.model.User;
 import com.easykitchen.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,15 @@ public class UserController {
                 .getAuthentication()
                 .getPrincipal();
         return userService.getAllOrders(userName);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER', 'ROLE_GUEST')")
+    @GetMapping("/current/payments")
+    public List<Payment> getAllPayments() {
+        String userName = (String) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+        return userService.getAllPayments(userName);
     }
 }
