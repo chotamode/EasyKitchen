@@ -1,11 +1,9 @@
 package com.easykitchen.project.service;
 
-import com.easykitchen.project.dao.CartDao;
 import com.easykitchen.project.dao.OrderDao;
 import com.easykitchen.project.exception.NonExistingCustomer;
 import com.easykitchen.project.exception.ValidationException;
 import com.easykitchen.project.model.*;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,28 +22,14 @@ public class OrderService {
 
     private final OrderDao orderDao;
 
-    private final CartDao cartDao;
     private final UserService userService;
     private final RecipeService recipeService;
 
     @Autowired
-    public OrderService(OrderDao orderDao, CartDao cartDao, UserService userService, RecipeService recipeService) {
+    public OrderService(OrderDao orderDao, UserService userService, RecipeService recipeService) {
         this.orderDao = orderDao;
-        this.cartDao = cartDao;
         this.userService = userService;
         this.recipeService = recipeService;
-    }
-
-    @Transactional
-    public Order createOrder(Cart cart) {
-        Objects.requireNonNull(cart);
-        checkCartCustomer(cart);
-        Order order = new Order(cart);
-        order.setId(new Random().nextInt());
-        order.setCreated(LocalDateTime.now());
-        removeCartItems(cart);
-        orderDao.persist(order);
-        return order;
     }
 
     @Transactional
@@ -78,11 +62,6 @@ public class OrderService {
         order.setNumberOfItems(orderItems.size());
     }
 
-    private void checkCartCustomer(Cart cart) {
-        if (cart.getOwner() == null) {
-            throw new NonExistingCustomer("Cart should have owner, otherwise order cannot be completed");
-        }
-    }
 
     private User generateCustomerAccount() {
         final User user = new User();
@@ -98,27 +77,6 @@ public class OrderService {
         return user;
     }
 
-    private void removeCartItems(Cart cart) {
-        cart.getItems().clear();
-        cartDao.update(cart);
-    }
-
-    @Transactional
-    public Order create(Cart cart) {
-        Objects.requireNonNull(cart);
-        final Order order = new Order(cart);
-        if (cart.getOwner() == null) {
-            order.setCustomer(generateCustomerAccount());
-        }
-        order.setCreated(LocalDateTime.now());
-        orderDao.persist(order);
-        clearCart(cart);
-        return order;
-    }
-    private void clearCart(Cart cart) {
-        cart.getItems().clear();
-        cartDao.update(cart);
-    }
     @Transactional
     public Order find(Integer id) {
         return orderDao.find(id);
